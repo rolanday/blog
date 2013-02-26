@@ -55,7 +55,7 @@ namespace ClientTest.Serializers
                 }
             }
             timer.Stop();
-            ReportExecuteTimes(serializationTime, timer.ElapsedMilliseconds);
+            SetMetrics(serializationTime, timer.ElapsedMilliseconds);
         }
 
         protected override string GetSerializationStringData()

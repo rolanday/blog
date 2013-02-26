@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
 
 namespace ClientTest.Serializers
 {
@@ -63,6 +66,12 @@ namespace ClientTest.Serializers
             get { return _serializedInstance == null ? 0 : _serializedInstance.Length; }
         }
 
+        private long _compressedLength;
+        public long CompressedLength
+        {
+            get { return _compressedLength; }
+        }
+
         /// <summary>
         /// Executes serialization performance tests.
         /// </summary>
@@ -71,10 +80,21 @@ namespace ClientTest.Serializers
         protected abstract string GetSerializationStringData();
 
 
-        protected void ReportExecuteTimes(long serializationTime, long deserializationTime)
+        protected void SetMetrics(long serializationTime, long deserializationTime)
         {
             SerializationTime = serializationTime;
             DeserializationTime = deserializationTime;
+
+            Debug.Assert(SerializedInstance != null && SerializedInstance.Length > 0);
+            // Compress data
+            using (var stream = new MemoryStream())
+            {
+                using (var gzip = new GZipStream(stream, CompressionMode.Compress, true))
+                {
+                    gzip.Write(SerializedInstance, 0, SerializedInstance.Length);
+                }
+                _compressedLength = stream.Length;
+            }
         }
 
         protected SerializerTest(T instance, long runs)

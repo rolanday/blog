@@ -39,7 +39,7 @@ namespace ClientTest.Serializers
                 JsonConvert.DeserializeObject<T>(json);
             }
             timer.Stop();
-            ReportExecuteTimes(serializationTime, timer.ElapsedMilliseconds);
+            SetMetrics(serializationTime, timer.ElapsedMilliseconds);
         }
 
         protected override string GetSerializationStringData()
