@@ -70,6 +70,7 @@ namespace ClientTest.Serializers
         public long CompressedLength
         {
             get { return _compressedLength; }
+            set { SetProperty(ref _compressedLength, value, "CompressedLength"); }
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace ClientTest.Serializers
                 {
                     gzip.Write(SerializedInstance, 0, SerializedInstance.Length);
                 }
-                _compressedLength = stream.Length;
+                CompressedLength = stream.Length;
             }
         }
 
