@@ -41,12 +41,12 @@ namespace ClientTest
             var i = Employee.JamesTKirk;
             var c = new Collection<SerializerTest<Employee>>
             {
-                new BinaryFormatterSerializerTest<Employee>(i, Iterations),
-                new JsonDataContractSerializerTest<Employee>(i, Iterations),
-                new JsonNewtonsoftSerializerTest<Employee>(i, Iterations),
                 new ProtobufSerializerTest<Employee>(i, Iterations),
                 new XmlDataContractSerializerTest<Employee>(i, Iterations),
-                new XmlSerializerTest<Employee>(i, Iterations)
+                new JsonDataContractSerializerTest<Employee>(i, Iterations),
+                new JsonNewtonsoftSerializerTest<Employee>(i, Iterations),
+                new XmlSerializerTest<Employee>(i, Iterations),
+                new BinaryFormatterSerializerTest<Employee>(i, Iterations)
             };
             
             /*
@@ -54,13 +54,14 @@ namespace ClientTest
             var c = new Collection<SerializerTest<TelemetryLog>>
             {
                 new ProtobufSerializerTest<TelemetryLog>(i, Iterations),
-                new BinaryFormatterSerializerTest<TelemetryLog>(i, Iterations),
+                new XmlDataContractSerializerTest<TelemetryLog>(i, Iterations),
                 new JsonDataContractSerializerTest<TelemetryLog>(i, Iterations),
                 new JsonNewtonsoftSerializerTest<TelemetryLog>(i, Iterations),
-                new XmlDataContractSerializerTest<TelemetryLog>(i, Iterations),
-                new XmlSerializerTest<TelemetryLog>(i, Iterations)
+                new XmlSerializerTest<TelemetryLog>(i, Iterations),
+                new BinaryFormatterSerializerTest<TelemetryLog>(i, Iterations)
             };
             */
+
             foreach (var test in c)
             {
                 test.Execute();
