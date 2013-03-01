@@ -6,7 +6,6 @@ using ProtoBuf;
 namespace ClientTest.Model
 {
     [Serializable]
-    [ProtoContract]
     [DataContract]
     [ProtoInclude(1, typeof(Citizen))]
     [ProtoInclude(2, typeof(Relation))]    

@@ -73,9 +73,13 @@
     </Compile>
     <Compile Include="Model\Citizen.cs" />
     <Compile Include="Model\Employee.cs" />
+    <Compile Include="Model\Speed.cs" />
+    <Compile Include="Model\Telemetry.cs" />
     <Compile Include="Model\Human.cs" />
     <Compile Include="Model\Lifeform.cs" />
     <Compile Include="Model\Relation.cs" />
+    <Compile Include="Model\TelemetryLog.cs" />
+    <Compile Include="Model\Temperature.cs" />
     <Compile Include="Serializers\BinaryFormatterSerializerTest.cs" />
     <Compile Include="Serializers\JsonNewtonsoftSerializerTest.cs" />
     <Compile Include="Serializers\ProtobufSerializerTest.cs" />

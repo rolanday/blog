@@ -1,25 +1,44 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 
 namespace ClientTest.Serializers
 {
-    public abstract class SerializerTest<T> : NotifyBase
+    /// <summary>
+    /// To get an properties in view w/o needing to specify type thereby
+    /// minimizing edits to change class being tested.
+    /// </summary>
+    public interface IDataView
+    {
+        byte[] SerializedInstance { get; }
+        SerializerType SerializerType { get; }
+        string SerializedDataStringView { get; }
+        object DeserializedObject { get; }
+    };
+
+    public abstract class SerializerTest<T> : NotifyBase, IDataView
     {
         public abstract SerializerType SerializerType { get; }
 
         private readonly T _instance;
+        [Browsable(false)]
         public T Instance { get { return _instance; } }
 
         private T _deserializedInstance;
+        [Browsable(false)]
         public T DeserializedInstance
         {
             get { return _deserializedInstance; }
             protected set { SetProperty(ref _deserializedInstance, value, "DeserializedInstance"); }
         }
 
+        [Browsable(false)]
+        public object DeserializedObject { get { return DeserializedInstance; } }
+
         private readonly long _runs;
+        [Browsable(false)]
         public long Runs
         {
             get { return _runs; }
@@ -40,6 +59,7 @@ namespace ClientTest.Serializers
         }
 
         private byte[] _serializedInstance;
+        [Browsable(false)]
         public byte[] SerializedInstance
         {
             get { return _serializedInstance; }
@@ -56,6 +76,7 @@ namespace ClientTest.Serializers
         }
 
         private string _serializedDataStringView;
+        [Browsable(false)]
         public string SerializedDataStringView
         {
             get { return _serializedDataStringView; }
@@ -98,6 +119,10 @@ namespace ClientTest.Serializers
             }
         }
 
+        private readonly string _className;
+        [Browsable(false)]
+        public string ClassName { get { return _className; } }
+
         protected SerializerTest(T instance, long runs)
         {
             if (ReferenceEquals(instance, null))
@@ -106,6 +131,7 @@ namespace ClientTest.Serializers
                 throw new ArgumentException("Value must be greater than 0.", "runs");
             _instance = instance;
             _runs = runs;
+            _className = typeof(T).Name;
         }
     }
 

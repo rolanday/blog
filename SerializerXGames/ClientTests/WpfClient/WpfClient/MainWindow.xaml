@@ -8,7 +8,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" x:Name="DataGrid" SelectionChanged="OnDataGridSelectionChanged"></DataGrid>
+        <DataGrid Grid.Row="0" x:Name="DataGrid" SelectionChanged="OnDataGridSelectionChanged" AutoGeneratingColumn="DataGrid_OnAutoGeneratingColumn"></DataGrid>
         <TabControl Grid.Row="1">
             <TabItem Header="Serialized Data">
                 <controls:SerializedDataViewControl x:Name="ViewControl" />

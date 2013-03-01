@@ -5,7 +5,6 @@ using ProtoBuf;
 namespace ClientTest.Model
 {
     [Serializable]
-    [ProtoContract]
     [DataContract]
     [ProtoInclude(1, typeof(Employee))]    
     public class Citizen : Human
